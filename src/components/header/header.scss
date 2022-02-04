@@ -1,0 +1,39 @@
+@import "global.scss";
+
+.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  top: 0;
+  padding: 10px 0 10px 0;
+  width: 100%;
+  border-bottom: 0.1px solid lightgray;
+  .left {
+    display: flex;
+    align-items: center;
+    .linkedInIcon {
+      font-size: 50px;
+      color: $primary;
+    }
+    .search {
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      background-color: #eef3f8;
+      border-radius: 5px;
+      color: #00000077;
+      input {
+        background: none;
+        border: none;
+        outline: none;
+        width: 230px;
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+  }
+}
