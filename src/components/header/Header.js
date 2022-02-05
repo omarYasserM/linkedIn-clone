@@ -2,7 +2,7 @@ import React from "react";
 import "./header.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import HeaderOption from "../headerOption";
+import HeaderOption from "../headerOption/HeaderOption";
 import HomeIcon from "@mui/icons-material/HomeRounded";
 import PeopleIcon from "@mui/icons-material/PeopleAltRounded";
 import WorkIcon from "@mui/icons-material/Work";

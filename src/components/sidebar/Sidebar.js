@@ -1,16 +1,23 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import "./sideBar.scss";
-function index() {
+function Sidebar() {
   const recentItem = (topic) => (
     <div className="recentItem">
       <span className="hash">#</span>
       <p>{topic}</p>
     </div>
   );
+  const divElement = useRef(null);
+
   return (
-    <div className="sidebar">
-      <div className="top">
+    <div
+      className="sidebar"
+      style={
+        divElement.current && { top: -divElement.current.clientHeight - 25 }
+      }
+    >
+      <div className="top" ref={divElement}>
         <img
           src="https://th.bing.com/th/id/R.7e44165bd92d8adb72b6eda48c4a7e3e?rik=wOeDGAfuGShUJA&pid=ImgRaw&r=0"
           alt=""
@@ -40,4 +47,4 @@ function index() {
   );
 }
 
-export default index;
+export default Sidebar;

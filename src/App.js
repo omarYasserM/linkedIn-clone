@@ -1,22 +1,29 @@
 import React from "react";
 import "./App.scss";
-import Sidebar from "./components/sidebar";
-import Header from "./components/header";
-import Feed from "./components/feed";
-function App() {
+import Sidebar from "./components/sidebar/Sidebar";
+import Header from "./components/header/Header";
+import Feed from "./components/feed/Feed.js";
+import { connect } from "react-redux";
+import SignIn from "./components/signIn/SignIn";
+function App({ currentUser }) {
   return (
     <div className="app">
-      <Header />
-
-      {/* App Body */}
-      <div className="body">
-        <Sidebar />
-        <Feed />
-      </div>
-
-      {/* Widgets */}
+      {currentUser ? (
+        <>
+          <Header />
+          <div className="body">
+            <Sidebar />
+            <Feed />
+          </div>
+        </>
+      ) : (
+        <SignIn />
+      )}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ currentUser }) => ({
+  currentUser,
+});
+export default connect(mapStateToProps)(App);

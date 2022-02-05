@@ -4,11 +4,12 @@
   background-color: white;
   display: flex;
   justify-content: space-evenly;
-  position: relative;
+  position: sticky;
   top: 0;
   padding: 10px 0 10px 0;
   width: 100%;
   border-bottom: 0.1px solid lightgray;
+  z-index: 999;
   .left {
     display: flex;
     align-items: center;
