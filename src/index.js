@@ -5,9 +5,9 @@ import App from "./App";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./redux/reducers";
+import userReducer from "./redux/userSlice";
 
-const store = configureStore({ reducer: rootReducer });
+const store = configureStore({ reducer: userReducer });
 
 ReactDOM.render(
   <React.StrictMode>

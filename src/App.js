@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.scss";
 import Sidebar from "./components/sidebar/Sidebar";
 import Header from "./components/header/Header";
 import Feed from "./components/feed/Feed.js";
-import { connect } from "react-redux";
 import SignIn from "./components/signIn/SignIn";
-function App({ currentUser }) {
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./redux/userSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase";
+
+function App() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoURL: userAuth.photoURL,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+
+    return () => {
+      unsubscribeAuth();
+    };
+  }, []);
+
   return (
     <div className="app">
-      {currentUser ? (
+      {user ? (
         <>
           <Header />
           <div className="body">
@@ -23,7 +51,4 @@ function App({ currentUser }) {
   );
 }
 
-const mapStateToProps = ({ currentUser }) => ({
-  currentUser,
-});
-export default connect(mapStateToProps)(App);
+export default App;
