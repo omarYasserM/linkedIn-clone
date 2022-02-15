@@ -5,8 +5,11 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 function HeaderOption({ avatar, Icon, title, onClick }) {
   return (
     <div className="headerOption" onClick={onClick}>
-      {Icon && <Icon className="icon"></Icon>}
-      {avatar && <Avatar className="avatar" src={avatar} />}
+      {Icon ? (
+        <Icon className="icon"></Icon>
+      ) : (
+        <Avatar className="avatar" src={avatar} />
+      )}
       <span className="title">{title}</span>
     </div>
   );

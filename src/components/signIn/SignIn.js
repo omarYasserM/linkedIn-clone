@@ -29,7 +29,16 @@ function SignIn() {
         updateProfile(userAuth.user, {
           displayName: name,
           photoURL: profileURL,
-        }).then(() => {});
+        }).then(() => {
+          dispatch(
+            login({
+              email: userAuth.email,
+              uid: userAuth.uid,
+              displayName: name,
+              photoURL: profileURL,
+            })
+          );
+        });
       })
       .catch((error) => alert(error));
   };

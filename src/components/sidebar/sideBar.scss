@@ -5,6 +5,7 @@
   text-align: center;
   height: fit-content;
   padding: 15px;
+  padding-top: 5px;
   position: sticky;
 
   .top {
@@ -25,7 +26,12 @@
     }
     .avatar {
       margin-bottom: 10px;
+      img {
+        margin-bottom: 10px;
+        object-fit: cover;
+      }
     }
+
     h4 {
       color: gray;
       font-size: 12px;

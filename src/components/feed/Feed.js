@@ -13,16 +13,19 @@ import { db } from "../../firebase/firebase";
 import {
   addDoc,
   collection,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
-  where,
 } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/userSlice";
+import FlipMove from "react-flip-move";
+
 function Feed() {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     const q = query(collection(db, "posts"), orderBy("timeStamp", "desc"));
@@ -36,19 +39,18 @@ function Feed() {
       );
       setInput("");
     });
-
-    const querySnapshot = onSnapshot(q);
   }, []);
 
   const sendPost = (e) => {
     e.preventDefault();
-    addDoc(collection(db, "posts"), {
-      name: "Omar yasser",
-      desc: "Frontend developer",
-      message: input,
-      photoURL: "",
-      timeStamp: serverTimestamp(),
-    });
+    if (input)
+      addDoc(collection(db, "posts"), {
+        name: user.displayName,
+        desc: "Frontend developer",
+        message: input,
+        photoURL: user.photoURL,
+        timeStamp: serverTimestamp(),
+      });
   };
   return (
     <div className="feed">
@@ -60,6 +62,7 @@ function Feed() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              placeholder="Start a post"
             />
             <button type="submit">Send</button>
           </form>
@@ -75,9 +78,17 @@ function Feed() {
           />
         </div>
       </div>
-      {posts.map(({ id, data: { name, desc, message, photoURL } }) => (
-        <Post key={id} name={name} desc={desc} message={message} />
-      ))}
+      <FlipMove>
+        {posts.map(({ id, data: { name, desc, message, photoURL } }) => (
+          <Post
+            key={id}
+            name={name}
+            desc={desc}
+            message={message}
+            photoURL={photoURL}
+          />
+        ))}
+      </FlipMove>
     </div>
   );
 }

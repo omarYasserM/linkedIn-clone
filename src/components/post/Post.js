@@ -5,15 +5,15 @@ import {
   ThumbUpAltOutlined,
 } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { forwardRef } from "react";
 import "./post.scss";
 import InputOption from "../inputOption/InputOption";
 
-function Post({ name, desc, message, photoURL }) {
+const Post = forwardRef(({ name, desc, message, photoURL }, ref) => {
   return (
-    <div className="post">
+    <div ref={ref} className="post">
       <div className="postHeader">
-        <Avatar />
+        <Avatar className="avatar" src={photoURL} />
         <div className="info">
           <h2>{name}</h2>
           <p>{desc}</p>
@@ -31,6 +31,6 @@ function Post({ name, desc, message, photoURL }) {
       </div>
     </div>
   );
-}
+});
 
 export default Post;

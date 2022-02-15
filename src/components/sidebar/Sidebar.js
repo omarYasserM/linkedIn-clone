@@ -1,5 +1,7 @@
 import { Avatar } from "@mui/material";
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/userSlice";
 import "./sideBar.scss";
 function Sidebar() {
   const recentItem = (topic) => (
@@ -9,12 +11,12 @@ function Sidebar() {
     </div>
   );
   const divElement = useRef(null);
-
+  const user = useSelector(selectUser);
   return (
     <div
       className="sidebar"
       style={
-        divElement.current && { top: -divElement.current.clientHeight - 25 }
+        divElement.current && { top: -divElement.current.clientHeight - 28 }
       }
     >
       <div className="top" ref={divElement}>
@@ -22,9 +24,9 @@ function Sidebar() {
           src="https://th.bing.com/th/id/R.7e44165bd92d8adb72b6eda48c4a7e3e?rik=wOeDGAfuGShUJA&pid=ImgRaw&r=0"
           alt=""
         />
-        <Avatar className="avatar" />
-        <h2>Omar yasser</h2>
-        <h4>omaryasser.cs@gmail.com</h4>
+        <Avatar className="avatar" src={user.photoURL} />
+        <h2>{user.displayName}</h2>
+        <h4>Frontend developer</h4>
       </div>
       <div className="stats">
         <div className="stat">
